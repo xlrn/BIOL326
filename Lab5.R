@@ -22,6 +22,8 @@ summary.aov(data_aov)
 means <- aggregate(data[,5], list(data$stressor), mean)
 dat1 <- as.numeric(as.character(means$x))
 dat1
+
+library(plotrix)
 sd <- aggregate(data[,5], list(data$stressor), sd)
 se <- aggregate(data[,5], list(data$stressor), std.error)
 dat2 <- as.numeric(as.character(se$x))
@@ -44,6 +46,6 @@ graph_data +
 library(multcomp)
 tuk <- glht(data_aov)
 summary(tuk)
-tuk.cld <- cld(tuk)
 tuk2 <- TukeyHSD(data_aov, ordered = TRUE, conf.level = 0.95)
 tuk2
+
