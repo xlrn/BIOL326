@@ -48,3 +48,5 @@ tuk <- glht(data_aov)
 summary(tuk)
 tuk2 <- TukeyHSD(data_aov, ordered = TRUE, conf.level = 0.95)
 tuk2
+csv_exp <- as.data.frame(tuk2$stressor)
+write.csv(tuk2, file="tuk.csv")
