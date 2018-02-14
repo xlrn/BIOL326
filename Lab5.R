@@ -48,4 +48,5 @@ tuk <- glht(data_aov)
 summary(tuk)
 tuk2 <- TukeyHSD(data_aov, ordered = TRUE, conf.level = 0.95)
 tuk2
-
+library(xlsx)
+write.xlsx(tuk2, "/Users/nelon/Documents/Notes/BIOL326/Lab5")
