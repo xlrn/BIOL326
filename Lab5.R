@@ -1,5 +1,3 @@
-setwd("/Users/nelon/Documents/Notes/BIOL326/Lab5")
-
 data <- read.csv("Lab5Combined.csv")
 names(data)
 str(data)
@@ -15,7 +13,8 @@ ml <- ml-m
 
 levels(data$stressor)
 
-data_aov <- aov(formula = speed~stressor, data=data)
+data_lm <- lm(speed~stressor, data)
+data_aov <- aov(data_lm)
 data_aov
 summary.aov(data_aov)
 
@@ -33,8 +32,16 @@ library(ggplot2)
 graph_data <- ggplot(means, aes(x = means$Group.1, y = means$x))
 
 graph_data + 
-  geom_bar(stat = "identity") + 
-  geom_errorbar(aes(ymin=dat1+ml, ymax=dat1+mu)) + 
+  labs(x= "Treatments", y= "Avg. Speed (mm/s)") +
+  geom_bar(stat = "identity", width=0.5, fill="#00ffcc") + 
+  annotate("text", x=3, y=0.33, label="a") +
+  annotate("text", x=1, y=0.52, label="b") +
+  annotate("text", x=2, y=0.47, label="a/b") +
+  annotate("text", x=4, y=0.57, label="b") +
+  annotate("text", x=5, y=0.50, label="a/b") +
+  annotate("text", x=6, y=0.52, label="b") +
+  annotate("text", x=7, y=0.61, label="b") +
+  geom_errorbar(aes(ymin=dat1+ml, ymax=dat1+mu), width=0.2) + 
   theme_bw() +
   theme(plot.background = element_blank()
         ,panel.grid.major = element_blank()
@@ -56,3 +63,4 @@ tuk3
 
 csv_exp <- as.data.frame(tuk2$stressor)
 write.csv(csv_exp, file="tuk.csv")
+
