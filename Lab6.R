@@ -1,7 +1,9 @@
 setwd("~/Documents/Notes/BIOL326/Lab6")
+library(dplyr)
 data <- read.csv("Lab data_v2.csv", stringsAsFactors = FALSE, strip.white = TRUE, na.strings = c("NA", ""))
 data2 <- read.csv("Lab data_v2sorted.csv", stringsAsFactors = FALSE, strip.white = TRUE, na.strings = c("NA", ""))
-dataNoCold <- data2[data2$Condition.Code == 'VT' || data2$Condition.Code == 'CN', ]
+
+dataNoCold <- filter(data2, (data2$Condition.Code == "VT" | data2$Condition.Code == "CN"))
 attached <- as.factor(data$Attached)
 cold <- data$Cold
 variability <- data$Var
