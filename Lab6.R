@@ -21,6 +21,9 @@ footSizeTenacity <- data_tenacity$Foot.size..mm.
 tenacity <- rowSums(data_tenacity[, c("X100g.weight","additional.weights..g.")]) 
 var_tenacity <- data_tenacity$Condition.Code
 
+detachTimeMin <- data_tenacity$tenacity..minutes.lost.attachment.
+detachTimeSec <- detachTimeMin * 60
+
 z <- glm(attached ~ variability * cold, family = binomial(link="logit"), data = data)
 z
 summary(z)
@@ -33,8 +36,15 @@ summary(z2)
 z2_ancova <- anova(z2)
 z2_ancova
 
-z3 <- lm(tenacity ~ var_tenacity * footSizeTenacity, data = dataNoCold)
+z3 <- lm(tenacity ~ var_tenacity * footSizeTenacity, data = data_tenacity)
 z3
 summary(z3)
 z3_ancova <- anova(z3)
 z3_ancova
+
+z4 <- lm(detachTimeSec ~ var_tenacity * footSizeTenacity, data = data_tenacity)
+z4
+summary(z4)
+z4_ancova <- anova(z4)
+z4_ancova
+
