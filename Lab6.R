@@ -188,3 +188,27 @@ z5_ancova <- anova(z5)
 z5_ancova
 
 library(ggplot2)
+average_tenacity <- aggregate(tenacity, list(data_tenacity$Condition.Code), mean, na.rm = TRUE)
+
+graph_tenacity = ggplot(average_tenacity, aes(x = average_tenacity$Group.1, y = average_tenacity$x))
+graph_tenacity +
+  geom_bar(stat = "identity", width=0.5, fill="#00ffcc") +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'))
+
+average_temp <- aggregate(detachTemp, list(data_temp$Condition.Code), mean, na.rm = TRUE)
+graph_temp = ggplot(average_tenacity, aes(x = average_temp$Group.1, y = average_temp$x))
+graph_temp +
+  geom_bar(stat = "identity", width=0.5, fill="#751aff") +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'))
