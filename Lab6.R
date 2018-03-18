@@ -13,16 +13,17 @@ attached <- as.factor(data$Attached)
 cold <- data$Cold
 variability <- data$Var
 
-timeToAttach <- data2$Time.to.attach..s...NR...not.recorded
-footSize <- data2$Foot.size..mm.
-strength <- data2$tenacity..weight.lost.attachment.
+timeToAttach <- dataNoCold$Time.to.attach..s...NR...not.recorded
+footSize <- dataNoCold$Foot.size..mm.
+strength <- dataNoCold$tenacity..weight.lost.attachment.
 
-attachedTime <- as.factor(data2$Time.to.attach..s...NR...not.recorded)
-variability2 <- data2$Condition.Code
+attachedTime <- as.factor(dataNoCold$Time.to.attach..s...NR...not.recorded)
+variability2 <- dataNoCold$Condition.Code
 
 footSizeTenacity <- data_tenacity$Foot.size..mm.
 tenacity <- rowSums(data_tenacity[, c("X100g.weight","additional.weights..g.")]) 
 var_tenacity <- data_tenacity$Condition.Code
+massTenacity <- data_tenacity$Weight..g.
 
 detachTimeMin <- data_tenacity$tenacity..minutes.lost.attachment.
 detachTimeSec <- detachTimeMin * 60
