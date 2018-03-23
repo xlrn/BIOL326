@@ -16,13 +16,14 @@ variability <- data$Var
 timeToAttach <- dataNoCold$Time.to.attach..s...NR...not.recorded
 footSize <- dataNoCold$Foot.size..mm.
 strength <- dataNoCold$tenacity..weight.lost.attachment.
+condCode <- as.factor(dataNoCold$Condition.Code)
 
 attachedTime <- as.factor(dataNoCold$Time.to.attach..s...NR...not.recorded)
 variability2 <- dataNoCold$Condition.Code
 
 footSizeTenacity <- data_tenacity$Foot.size..mm.
 tenacity <- rowSums(data_tenacity[, c("X100g.weight","additional.weights..g.")]) 
-var_tenacity <- data_tenacity$Condition.Code
+var_tenacity <- as.factor(data_tenacity$Condition.Code)
 massTenacity <- data_tenacity$Weight..g.
 
 detachTimeMin <- data_tenacity$tenacity..minutes.lost.attachment.
@@ -31,7 +32,7 @@ detachTimeSec <- detachTimeMin * 60
 detachTimeMinTemp <- data_temp$tenacity..minutes.lost.attachment.
 detachTimeSecTemp <- detachTimeMinTemp * 60
 detachTemp <- data_temp$temperature.lost.attachment..celsius.
-var_temp <- data_temp$Condition.Code
+var_temp <- as.factor(data_temp$Condition.Code)
 massTemp <- data_temp$Weight..g.
 
 
@@ -190,7 +191,11 @@ z5_ancova
 library(ggplot2)
 average_tenacity <- aggregate(tenacity, list(data_tenacity$Condition.Code), mean, na.rm = TRUE)
 
+<<<<<<< HEAD
 graph_tenacity = ggplot(average_tenacity, aes(x = average_tenacity$Group.1, y = average_tenacity$x))
+=======
+graph_tenacity <- ggplot(average_tenacity, aes(x = average_tenacity$Group.1, y = average_tenacity$x))
+>>>>>>> 537d16e6defb6d8fde100e285f2e1cff200ae2c1
 graph_tenacity +
   geom_bar(stat = "identity", width=0.5, fill="#00ffcc") +
   theme_bw() +
@@ -212,3 +217,83 @@ graph_temp +
         ,panel.border = element_blank()
   ) +
   theme(axis.line = element_line(color = 'black'))
+<<<<<<< HEAD
+=======
+
+graph_attachTime = ggplot(dataNoCold, aes(x=footSize, y=timeToAttach,
+                                          color = condCode,
+                                          shape = condCode)) + 
+  labs(x= "Foot Size (mm)", y= "Time to Attach (sec)", shape="Conditions", color="Conditions") +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'),
+        axis.text = element_text(size=14),
+        axis.title = element_text(size=14),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=14))
+graph_attachTime
+
+graph_strength = ggplot(data_tenacity, aes(x=footSizeTenacity, y=tenacity,
+                                          color = var_tenacity,
+                                          shape = var_tenacity)) + 
+  labs(x= "Foot Size (mm)", y= "Strength of Attachment (g)", shape="Conditions", color="Conditions") +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'),
+        axis.text = element_text(size=14),
+        axis.title = element_text(size=14),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=14))
+graph_strength
+
+graph_detachTime = ggplot(data_tenacity, aes(x=footSizeTenacity, y=detachTimeSec,
+                                           color = var_tenacity,
+                                           shape = var_tenacity)) + 
+  labs(x= "Foot Size (mm)", y= "Time of Detachment (sec)", shape="Conditions", color="Conditions") +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'),
+        axis.text = element_text(size=14),
+        axis.title = element_text(size=14),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=14))
+graph_detachTime
+
+graph_detachTemp = ggplot(data_temp, aes(x=massTemp, y=detachTemp,
+                                             color = var_temp,
+                                             shape = var_temp)) + 
+  labs(x= "Weight (g)", y= "Temp of Detachment (Celsius)", shape="Conditions", color="Conditions") +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_bw() +
+  theme(plot.background = element_blank()
+        ,panel.grid.major = element_blank()
+        ,panel.grid.minor = element_blank()
+        ,panel.border = element_blank()
+  ) +
+  theme(axis.line = element_line(color = 'black'),
+        axis.text = element_text(size=14),
+        axis.title = element_text(size=14),
+        legend.text = element_text(size=12),
+        legend.title = element_text(size=14))
+graph_detachTemp
+
+>>>>>>> 537d16e6defb6d8fde100e285f2e1cff200ae2c1
