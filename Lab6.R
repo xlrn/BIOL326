@@ -191,11 +191,9 @@ z5_ancova
 library(ggplot2)
 average_tenacity <- aggregate(tenacity, list(data_tenacity$Condition.Code), mean, na.rm = TRUE)
 
-<<<<<<< HEAD
+
 graph_tenacity = ggplot(average_tenacity, aes(x = average_tenacity$Group.1, y = average_tenacity$x))
-=======
-graph_tenacity <- ggplot(average_tenacity, aes(x = average_tenacity$Group.1, y = average_tenacity$x))
->>>>>>> 537d16e6defb6d8fde100e285f2e1cff200ae2c1
+
 graph_tenacity +
   geom_bar(stat = "identity", width=0.5, fill="#00ffcc") +
   theme_bw() +
@@ -217,8 +215,6 @@ graph_temp +
         ,panel.border = element_blank()
   ) +
   theme(axis.line = element_line(color = 'black'))
-<<<<<<< HEAD
-=======
 
 graph_attachTime = ggplot(dataNoCold, aes(x=footSize, y=timeToAttach,
                                           color = condCode,
@@ -296,4 +292,3 @@ graph_detachTemp = ggplot(data_temp, aes(x=massTemp, y=detachTemp,
         legend.title = element_text(size=14))
 graph_detachTemp
 
->>>>>>> 537d16e6defb6d8fde100e285f2e1cff200ae2c1
